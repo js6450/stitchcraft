@@ -3,14 +3,19 @@
 import { create } from "zustand";
 import { YARN_WEIGHTS } from "@/types";
 import { calculateGrid, convertDimension } from "@/lib/gauge";
-import type { ProjectSettings, YarnWeight, Unit, GridDimensions } from "@/types";
+import type { ProjectSettings, YarnWeight, Unit, GridDimensions, PaletteColor } from "@/types";
+
+const DEFAULT_PALETTE: PaletteColor[] = [
+  { id: "color-1", name: "Main",     hex: "#F5F0E8" },
+  { id: "color-2", name: "Contrast", hex: "#6B2D5B" },
+];
 
 interface ProjectStore {
+  // ── Project setup ──────────────────────────────
   settings: ProjectSettings;
   grid: GridDimensions;
   isSetupComplete: boolean;
 
-  // Actions
   setName: (name: string) => void;
   setYarnWeight: (weight: YarnWeight) => void;
   setStitchGauge: (value: number) => void;
@@ -22,6 +27,16 @@ interface ProjectStore {
   setRowOverride: (value: number | null) => void;
   completeSetup: () => void;
   resetSetup: () => void;
+
+  // ── Color palette ───────────────────────────────
+  palette: PaletteColor[];
+  activeColorId: string;
+
+  addColor: () => void;
+  removeColor: (id: string) => void;
+  updateColorHex: (id: string, hex: string) => void;
+  updateColorName: (id: string, name: string) => void;
+  setActiveColor: (id: string) => void;
 }
 
 const DEFAULT_YARN_WEIGHT: YarnWeight = "worsted";
@@ -53,7 +68,8 @@ function deriveGrid(settings: ProjectSettings): GridDimensions {
   };
 }
 
-export const useProjectStore = create<ProjectStore>((set, get) => ({
+export const useProjectStore = create<ProjectStore>((set) => ({
+  // ── Project setup ──────────────────────────────
   settings: DEFAULT_SETTINGS,
   grid: deriveGrid(DEFAULT_SETTINGS),
   isSetupComplete: false,
@@ -129,5 +145,43 @@ export const useProjectStore = create<ProjectStore>((set, get) => ({
       settings: DEFAULT_SETTINGS,
       grid: deriveGrid(DEFAULT_SETTINGS),
       isSetupComplete: false,
+      palette: DEFAULT_PALETTE,
+      activeColorId: DEFAULT_PALETTE[0].id,
     }),
+
+  // ── Color palette ───────────────────────────────
+  palette: DEFAULT_PALETTE,
+  activeColorId: DEFAULT_PALETTE[0].id,
+
+  addColor: () =>
+    set((s) => {
+      const id = `color-${Date.now()}`;
+      const newColor: PaletteColor = { id, name: "New Color", hex: "#C4943A" };
+      return {
+        palette: [...s.palette, newColor],
+        activeColorId: id,
+      };
+    }),
+
+  removeColor: (id) =>
+    set((s) => {
+      if (s.palette.length <= 1) return s;
+      const palette = s.palette.filter((c) => c.id !== id);
+      // If removing the active color, fall back to the first remaining color
+      const activeColorId =
+        s.activeColorId === id ? palette[0].id : s.activeColorId;
+      return { palette, activeColorId };
+    }),
+
+  updateColorHex: (id, hex) =>
+    set((s) => ({
+      palette: s.palette.map((c) => (c.id === id ? { ...c, hex } : c)),
+    })),
+
+  updateColorName: (id, name) =>
+    set((s) => ({
+      palette: s.palette.map((c) => (c.id === id ? { ...c, name } : c)),
+    })),
+
+  setActiveColor: (id) => set({ activeColorId: id }),
 }));

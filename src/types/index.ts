@@ -41,3 +41,9 @@ export interface GridDimensions {
   stitches: number;
   rows: number;
 }
+
+export interface PaletteColor {
+  id: string;
+  name: string;
+  hex: string;
+}

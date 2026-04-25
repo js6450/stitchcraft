@@ -1,11 +1,13 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useProjectStore } from "@/store/projectStore";
 import { YARN_WEIGHTS } from "@/types";
 import { calculateGrid } from "@/lib/gauge";
 import type { YarnWeight, Unit } from "@/types";
 
 export default function ProjectSetup() {
+  const router = useRouter();
   const {
     settings,
     grid,
@@ -34,7 +36,10 @@ export default function ProjectSetup() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (settings.name.trim()) completeSetup();
+    if (settings.name.trim()) {
+      completeSetup();
+      router.push("/palette");
+    }
   };
 
   return (

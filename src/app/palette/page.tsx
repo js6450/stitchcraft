@@ -1,13 +1,13 @@
 import Link from "next/link";
-import ProjectSetup from "@/components/ProjectSetup";
+import ColorPaletteSetup from "@/components/ColorPaletteSetup";
 import LogoMark from "@/components/landing/LogoMark";
 import { COLORS } from "@/lib/theme";
 
 export const metadata = {
-  title: "New Project — Stitchcraft",
+  title: "Color Palette — Stitchcraft",
 };
 
-export default function DesignPage() {
+export default function PalettePage() {
   return (
     <main className="min-h-screen bg-cream">
       <header className="border-b border-charcoal/10 px-6 py-4">
@@ -26,16 +26,16 @@ export default function DesignPage() {
             className="flex items-center gap-2 text-xs text-charcoal/40"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            <span className="font-semibold text-plum">Setup</span>
+            <span className="text-charcoal/25">Setup</span>
             <span className="text-charcoal/25">→</span>
-            <span className="text-charcoal/25">Palette</span>
+            <span className="font-semibold text-plum">Palette</span>
             <span className="text-charcoal/25">→</span>
             <span className="text-charcoal/25">Design</span>
           </div>
         </div>
       </header>
 
-      <ProjectSetup />
+      <ColorPaletteSetup />
     </main>
   );
 }
