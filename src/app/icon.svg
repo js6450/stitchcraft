@@ -1,0 +1,12 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Plum background with rounded corners -->
+  <rect width="120" height="120" rx="26" fill="#6B2D5B"/>
+  <!-- Upper V (pointing down) -->
+  <path d="M34 32 L60 68 L86 32" stroke="#F5F0E8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lower V (pointing up) — interlocks to form a diamond -->
+  <path d="M34 88 L60 52 L86 88" stroke="#F5F0E8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Gold sparkle at center -->
+  <g transform="translate(60, 60)">
+    <path d="M0 -8 C1 -1, 1 -1, 8 0 C1 1, 1 1, 0 8 C-1 1, -1 1, -8 0 C-1 -1, -1 -1, 0 -8Z" fill="#D4A853"/>
+  </g>
+</svg>

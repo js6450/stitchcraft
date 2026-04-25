@@ -294,8 +294,8 @@ export default function Home() {
       </div>
 
       {/* ── How It Works (parchment) ─────────────────── */}
-      <div className="bg-parchment px-10 py-20">
-        <div className="max-w-6xl mx-auto">
+      <div className="bg-parchment">
+        <div className="px-10 py-20 max-w-6xl mx-auto">
           <h2
             className="text-charcoal text-3xl font-normal mb-10"
             style={{ fontFamily: "var(--font-heading)" }}
