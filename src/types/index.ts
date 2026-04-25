@@ -42,6 +42,11 @@ export interface GridDimensions {
   rows: number;
 }
 
+// Each cell is either unpainted (null) or a hex color string
+export type GridData = (string | null)[][];
+
+export type Tool = "paint" | "eraser" | "fill-row" | "fill-col";
+
 export interface PaletteColor {
   id: string;
   name: string;

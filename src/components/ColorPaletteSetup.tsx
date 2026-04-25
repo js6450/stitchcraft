@@ -119,7 +119,7 @@ export default function ColorPaletteSetup() {
           className="text-xs font-semibold tracking-widest uppercase text-rose-gold mb-3"
           style={{ fontFamily: "var(--font-body)" }}
         >
-          {settings.name || "Your Project"}
+          {settings.name}
         </p>
         <h1
           className="text-3xl font-normal text-charcoal tracking-tight"
