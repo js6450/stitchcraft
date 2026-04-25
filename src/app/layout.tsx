@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Knitting Pattern Designer",
+  title: "Stitchcraft",
   description: "Design colorwork knitting patterns and export printable pattern sheets.",
 };
 

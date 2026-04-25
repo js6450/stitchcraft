@@ -8,7 +8,7 @@ export default function Home() {
         <div className="max-w-2xl mx-auto flex items-center gap-2">
           <span className="text-xl">🧶</span>
           <span className="font-semibold text-stone-800 tracking-tight">
-            Knitting Pattern Designer
+            Stitchcraft
           </span>
         </div>
       </header>
