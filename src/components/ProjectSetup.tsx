@@ -40,11 +40,17 @@ export default function ProjectSetup() {
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
       <div className="mb-10">
-        <h1 className="text-3xl font-semibold text-stone-800 tracking-tight">
+        <h1
+          className="text-3xl font-normal text-charcoal tracking-tight"
+          style={{ fontFamily: "var(--font-heading)" }}
+        >
           New Project
         </h1>
-        <p className="mt-2 text-stone-500">
-          Tell us about your project and we'll calculate your grid size.
+        <p
+          className="mt-2 text-charcoal/50"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          Tell us about your project and we&apos;ll calculate your grid size.
         </p>
       </div>
 
@@ -60,7 +66,7 @@ export default function ProjectSetup() {
             value={settings.name}
             onChange={(e) => setName(e.target.value)}
             placeholder="e.g. Living Room Blanket"
-            className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+            className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
             required
           />
         </section>
@@ -79,7 +85,7 @@ export default function ProjectSetup() {
                   onClick={() => setYarnWeight(key)}
                   className={`rounded-lg border px-2 py-2 text-xs font-medium transition-colors ${
                     settings.yarnWeight === key
-                      ? "border-rose-400 bg-rose-50 text-rose-700"
+                      ? "border-plum bg-plum/10 text-plum"
                       : "border-stone-200 bg-white text-stone-600 hover:border-stone-400"
                   }`}
                 >
@@ -111,7 +117,7 @@ export default function ProjectSetup() {
                 step={0.5}
                 value={settings.stitchGauge}
                 onChange={(e) => setStitchGauge(Number(e.target.value))}
-                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
               />
             </div>
             <div>
@@ -123,7 +129,7 @@ export default function ProjectSetup() {
                 step={0.5}
                 value={settings.rowGauge}
                 onChange={(e) => setRowGauge(Number(e.target.value))}
-                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
               />
             </div>
           </div>
@@ -164,7 +170,7 @@ export default function ProjectSetup() {
                 step={0.5}
                 value={settings.width}
                 onChange={(e) => setWidth(Number(e.target.value))}
-                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
               />
             </div>
             <div>
@@ -177,7 +183,7 @@ export default function ProjectSetup() {
                 step={0.5}
                 value={settings.height}
                 onChange={(e) => setHeight(Number(e.target.value))}
-                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                className="w-full rounded-lg border border-stone-300 px-4 py-2.5 text-stone-800 focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
               />
             </div>
           </div>
@@ -229,7 +235,7 @@ export default function ProjectSetup() {
                       e.target.value === "" ? null : Number(e.target.value)
                     )
                   }
-                  className="w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-800 placeholder:text-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                  className="w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-800 placeholder:text-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
                 />
               </div>
               <div>
@@ -246,12 +252,12 @@ export default function ProjectSetup() {
                       e.target.value === "" ? null : Number(e.target.value)
                     )
                   }
-                  className="w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-800 placeholder:text-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-rose-400 focus:border-transparent"
+                  className="w-full rounded-lg border border-stone-300 px-3 py-2 text-stone-800 placeholder:text-stone-300 text-sm focus:outline-none focus:ring-2 focus:ring-plum focus:border-transparent"
                 />
               </div>
             </div>
             {(settings.stitchOverride !== null || settings.rowOverride !== null) && (
-              <p className="text-xs text-rose-500 mt-2">
+              <p className="text-xs text-plum mt-2">
                 Using overridden values:{" "}
                 <strong>{grid.stitches} sts × {grid.rows} rows</strong>
               </p>
@@ -263,7 +269,7 @@ export default function ProjectSetup() {
         <button
           type="submit"
           disabled={!settings.name.trim()}
-          className="w-full rounded-lg bg-rose-500 px-6 py-3 text-white font-medium hover:bg-rose-600 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          className="w-full rounded-xl bg-plum px-6 py-3 text-cream font-medium hover:bg-plum/90 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
         >
           Open Grid Editor →
         </button>
