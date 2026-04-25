@@ -1,5 +1,5 @@
-// Option A from the Stitchcraft logo explorations:
-// Knit V-stitch with a 4-point star sparkle.
+// Option E from the Stitchcraft logo explorations:
+// Two interlocked V-stitches forming a diamond, with a sparkle at the center.
 
 interface LogoMarkProps {
   size?: number;
@@ -20,18 +20,26 @@ export default function LogoMark({
       fill="none"
       aria-hidden="true"
     >
-      {/* V stitch shape */}
+      {/* Upper V (pointing down) */}
       <path
-        d="M36 28 L60 88 L84 28"
+        d="M34 32 L60 68 L86 32"
         stroke={color}
-        strokeWidth="8"
+        strokeWidth="7"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-      {/* Four-point sparkle at top right */}
-      <g transform="translate(82, 24)">
+      {/* Lower V (pointing up) — interlocks with upper to form a diamond */}
+      <path
+        d="M34 88 L60 52 L86 88"
+        stroke={color}
+        strokeWidth="7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Four-point sparkle at center */}
+      <g transform="translate(60, 60)">
         <path
-          d="M0 -12 C2 -2, 2 -2, 12 0 C2 2, 2 2, 0 12 C-2 2, -2 2, -12 0 C-2 -2, -2 -2, 0 -12Z"
+          d="M0 -8 C1 -1, 1 -1, 8 0 C1 1, 1 1, 0 8 C-1 1, -1 1, -8 0 C-1 -1, -1 -1, 0 -8Z"
           fill={sparkle}
         />
       </g>
