@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useProjectStore } from "@/store/projectStore";
 import LogoMark from "@/components/landing/LogoMark";
@@ -10,12 +10,48 @@ import Toolbar from "./Toolbar";
 import GridCanvas from "./GridCanvas";
 
 export default function EditorLayout() {
-  const { settings, grid, initGridData, undo, redo } = useProjectStore();
+  const {
+    settings,
+    grid,
+    initGridData,
+    undo,
+    redo,
+    gridData,
+    fitToView,
+    repeatEnabled,
+    repeatDirection,
+  } = useProjectStore();
+
+  const scrollRef      = useRef<HTMLDivElement>(null);
+  const prevFitToView  = useRef(false);
 
   // Initialise grid data on mount (no-op if already the right size)
   useEffect(() => {
     initGridData();
   }, [initGridData]);
+
+  // Scroll to bottom once the grid is first populated (knitting reads bottom-up)
+  const hasGrid = gridData.length > 0;
+  useEffect(() => {
+    if (hasGrid && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [hasGrid]);
+
+  // Scroll to bottom when repeat "Both" is active so the tile origin is visible
+  useEffect(() => {
+    if (repeatEnabled && repeatDirection === "both" && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [repeatEnabled, repeatDirection]);
+
+  // Scroll to bottom when leaving fit-to-view (returning to scrollable grid view)
+  useEffect(() => {
+    if (prevFitToView.current && !fitToView && scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+    prevFitToView.current = fitToView;
+  }, [fitToView]);
 
   // Keyboard shortcuts: ⌘Z / ⌘⇧Z
   useEffect(() => {
@@ -70,7 +106,7 @@ export default function EditorLayout() {
           style={{ fontFamily: "var(--font-body)" }}
           title="Coming in Phase 4"
         >
-          Export PDF
+          Export Project
         </button>
       </header>
 
@@ -84,8 +120,8 @@ export default function EditorLayout() {
         <div className="flex flex-col flex-1 overflow-hidden">
           <Toolbar />
 
-          {/* Scrollable canvas area */}
-          <div className="flex-1 overflow-auto p-6 bg-parchment/40">
+          {/* Scrollable canvas area — overflow-hidden when fit-to-view so the canvas fills it */}
+          <div ref={scrollRef} className={`flex-1 p-6 bg-parchment/40 ${fitToView ? "overflow-hidden" : "overflow-auto"}`}>
             <GridCanvas />
           </div>
         </div>
